@@ -22,11 +22,20 @@ In this challenge, you are to build a Smurfs village utilizing context or Redux 
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
-- [ ] What problem does the context API help solve?
-- [ ] In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
-- [ ] What is the difference between Application state and Component state? When would be a good time to use one over the other?
-- [ ] Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
-- [ ] What is your favorite state management system you've learned and this sprint? Please explain why!
+- [x] What problem does the context API help solve?
+      The context API helps create a global application state that is stored on a context object and distributed to the components that need it, without the need for excessive prop drilling. It functions very much like a state management library such as Redux, in that it uses a Provider component to wrap the application, and distribuite state data only to the components that need it, rather than through excessive and confusing prop drilling with deeply nested components. It allows for smaller-scale applications to forgo the need for a library such as Redux through careful use of a combination of the context object, component composition, and limited props drilling, where necessary.
+
+- [x] In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
+      Actions are objects that describe something that happens in the application. They dispatch action objects to reducer functions, which then create a new state object. Reducers are pure functions that take two arguments. The first is the current state, and the second is an action to modify the current state. The store is an immutable object that describes the state for the entire application. By using actions and reducers to replace the state object with an entirely new state object, we can use time travel debugging, and various other cool features that would not be possible with a mutable state. Another advantage of this design pattern, that is, immutability of state, is that application behavior becomes more organized and predictable overall. This leads to an overall easier to manage application at scale.
+
+- [x] What is the difference between Application state and Component state? When would be a good time to use one over the other?
+      Application state is something like the store object in Redux. It is a large JavaScript object that is immutable, and describes the global state for the entire application. Data stored in the store is meant to be used in multiple places throughout the application, thus the need for the Provider component, and global application state in the first place. Component state is data that only the componenent holding that particular piece of state is concerned with, or possibly it's children through props. Typically, a combination of global and component state will be used in a large-scale application. Really, if a piece of state is only being used by one component, it is easier and probably ultimately just as well to let that state remain component state, instead of adding it to the global state object.
+
+- [x] Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
+      Redux-thunk intercepts the normal, synchronous action -> reducer flow, and allows action creators to perform asynchronous API call. It does this by intercepting and acting on data returned from action creators. If the thing returned is an action, it forwards the action through to the reducer. If it is a function, however, it then invokes the function, a.k.a. the thunk, and passes the dispatch function as an argumentto it. This allows us to dispatch an action inside the then() block of an async function.
+
+* [x] What is your favorite state management system you've learned and this sprint? Please explain why!
+      I like using context with the reducer pattern a bit more than straight Redux so far, however I can see various use cases for all of them, and I get that ultimately, the best approach is to use whichever one works best for the given problem you are trying to solve within your application. Sometimes, the best approach is to just mix and match!
 
 ## Project Set Up
 
