@@ -1,17 +1,46 @@
-import React, { Component } from "react";
-import { devToolsEnhancer } from "redux-devtools-extension";
+import React, { useState, useEffect } from "react";
+
+import { connect } from "react-redux";
+
+import { getSmurfs } from "../redux/actions/index";
+
+import SmurfForm from "../components/SmurfForm";
+import SmurfList from "../components/SmurfList";
+
 import "./App.css";
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <h1>SMURFS! 2.0 W/ Redux</h1>
-        <div>Welcome to your state management version of Smurfs!</div>
-        <div>Start inside of your `src/index.js` file!</div>
-        <div>Have fun!</div>
-      </div>
-    );
-  }
-}
+
+const App = props => {
+  const [smurf, setSmurf] = useState();
+
+  useEffect(() => {
+    props.getSmurfs();
+  }, []);
+
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log(smurf);
+    props.addSmurf({
+      name: name,
+      age: age,
+      height: height,
+      id: Date.now()
+    });
+  };
+
+  const handleChanges = e => {
+    e.preventDefault();
+    let smurf = e.target.value;
+    setSmurf(smurf);
+  };
+
+  return (
+    <div className="App">
+      <SmurfForm />
+      <SmurfList />
+    </div>
+  );
+};
+
+const mapStateToProps = state => {};
 
 export default App;
