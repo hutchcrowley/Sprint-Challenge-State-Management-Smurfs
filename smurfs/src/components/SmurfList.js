@@ -2,10 +2,12 @@ import React from "react";
 
 import { connect } from "react-redux";
 
+import Spinner from "./Spinner";
+
 import Smurf from "./Smurf";
 
 const SmurfList = props => {
-  return (
+  return !props.isloading ? (
     <ol className="smurf-list">
       {props.smurfs.map(smurf => {
         return (
@@ -20,11 +22,13 @@ const SmurfList = props => {
         );
       })}
     </ol>
+  ) : (
+    <Spinner />
   );
 };
 
 const mapStateToProps = state => {
-  return { smurfs: state.smurfs };
+  return { smurfs: state.smurfs, isLoading: state.isLoading };
 };
 
 export default connect(mapStateToProps, null)(SmurfList);
