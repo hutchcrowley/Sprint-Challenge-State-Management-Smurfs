@@ -1,29 +1,25 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { editSmurf } from "../Redux/actions/index";
+
 import Spinner from "./Spinner";
 
 const SmurfEditForm = props => {
-  const [smurf, setSmurf] = useState({
-    name: props.location,
-    age: props.location,
-    height: props.location,
-    id: props.location,
-    isEditing: false
-  });
+  const [updatedSmurf, setUpdatedSmurf] = useState({});
 
-  const handleSubmit = (e, smurf) => {
+  const handleSubmit = (e, updatedSmurf) => {
     e.preventDefault();
-    props.editSmurf(props.id);
+    props.editSmurf(updatedSmurf);
   };
 
   const handleInputChange = e => {
-    setSmurf({ ...smurf, [e.target.name]: e.target.value });
+    e.persist();
+    setUpdatedSmurf({ ...updatedSmurf, [e.target.name]: e.target.value });
   };
 
   return (
     <div>
-      {!props.isEditing ? (
+      {!props.isUpdating ? (
         <div className="smurf-editor">
           <form onSubmit={handleSubmit}>
             <input
@@ -58,11 +54,7 @@ const SmurfEditForm = props => {
 
 const mapStateToProps = state => {
   return {
-    name: state.name,
-    age: state.age,
-    height: state.age,
-    id: state.id,
-    isEditing: state.isEditing
+    isUpdating: state.isUpdating
   };
 };
 

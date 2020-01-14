@@ -15,7 +15,7 @@ const Smurf = props => {
   return (
     <div>
       {!props.isDeleting ? (
-        <div className="smurf" key={props.key}>
+        <div className="smurf-card" key={props.key}>
           <h1>{props.name}</h1>
           <h3>Smurf Age:</h3>
           <h3>{props.age}</h3>

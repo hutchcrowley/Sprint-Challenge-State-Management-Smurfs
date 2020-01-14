@@ -11,10 +11,10 @@ import { getSmurfs } from "../Redux/actions/index";
 const SmurfList = props => {
   const initSmurfs = props.getSmurfs;
   useEffect(() => {
-    initSmurfs();
-  }, [initSmurfs]);
+    initSmurfs([{}]);
+  }, []);
 
-  console.log("This is the initial smurf village: ", initSmurfs.smurf);
+  console.log("This is the initial smurf village: ", props.smurfs);
 
   return (
     <div>

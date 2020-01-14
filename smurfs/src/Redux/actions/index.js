@@ -64,12 +64,12 @@ export const deleteSmurf = id => dispatch => {
     });
 };
 
-export const editSmurf = smurf => dispatch => {
+export const editSmurf = updatedSmurf => dispatch => {
   dispatch({ type: EDIT_SMURF });
   axios
-    .put(`http://localhost:3333/smurfs/${smurf.id}`, smurf)
+    .put(`http://localhost:3333/smurfs/${updatedSmurf.id}`, updatedSmurf)
     .then(res => {
-      console.log("This is the result of a put request to the API: ", res);
+      console.log("This is the result of a put request to the API: ", res.data);
       dispatch({ type: EDIT_SMURF_SUCCESS, payload: res.data });
     })
     .catch(err => {

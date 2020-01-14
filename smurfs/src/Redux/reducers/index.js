@@ -14,19 +14,25 @@ import {
 } from "../actions/index";
 
 const initialState = {
-  smurfs: [],
+  smurfs: [
+    {
+      name: "",
+      age: "",
+      height: ""
+    }
+  ],
   isLoading: false,
   isAdding: false,
   isUpdating: false,
   isDeleting: false,
-  error: null
+  error: ""
 };
 
 export const rootReducer = (state = initialState, action) => {
   console.log("reducer: ", action.type, action.payload);
   switch (action.type) {
     case GET_SMURFS_START:
-      return { ...state, error: null, isLoading: true };
+      return { ...state, error: "", isLoading: true };
 
     case GET_SMURFS_SUCCESS:
       console.log("Successfully retrieved smurf data!");
@@ -34,14 +40,14 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         smurfs: action.payload,
         isLoading: false,
-        error: null
+        error: ""
       };
 
     case GET_SMURFS_FAILURE:
       return { ...state, isLoading: false, error: action.payload.error };
 
     case ADD_SMURF_START:
-      return { ...state, isAdding: true, error: null };
+      return { ...state, isAdding: true, error: "" };
 
     case ADD_SMURF_SUCCESS:
       return {
@@ -58,7 +64,7 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         isDeleting: true,
-        error: null
+        error: ""
       };
     case DELETE_SMURF_SUCCESS:
       return {
@@ -76,7 +82,8 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         isUpdating: true,
-        error: null
+        error: "",
+        smurfs: action.payload
       };
     case EDIT_SMURF_SUCCESS:
       return {
