@@ -1,46 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { connect } from "react-redux";
 
-import SmurfForm from "../components/SmurfForm";
-import SmurfList from "../components/SmurfList";
+import SmurfForm from "./SmurfForm";
+import SmurfList from "./SmurfList";
+import SmurfEditForm from "./SmurfEditForm";
 
 import "./App.css";
 
-import { getSmurfs } from "../Redux/actions/index";
-
 const App = props => {
-  const [smurf, setSmurf] = useState();
-
-  useEffect(() => {
-    getSmurfs();
-  }, []);
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log(smurf);
-    props.addSmurf(smurf);
-    setSmurf({ name: "", age: "", height: "" });
-  };
-
-  const handleChanges = e => {
-    setSmurf({ ...smurf, [e.target.name]: e.target.value });
-  };
-
   return (
     <div className="App">
-      <SmurfForm onChange={handleChanges} onSubmit={handleSubmit} />
+      <SmurfForm />
       <SmurfList />
+      <SmurfEditForm />
     </div>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    smurfs: state.smurfs
+    smurfs: state.smurfs,
+    error: state.error
   };
 };
 
-export default connect(mapStateToProps, {
-  getSmurfs
-})(App);
+export default connect(mapStateToProps, null)(App);

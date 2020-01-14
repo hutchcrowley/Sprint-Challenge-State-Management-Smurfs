@@ -58,8 +58,8 @@ Follow these steps to set up your project:
 
 ### GET '/smurfs'
 
-- [ ] Retrieve an array all the Smurfs in the Smurf DB by writing a `GET` to the endpoint `/smurfs`.
-- [ ] Double check that your response from the server is an array of smurfs.
+- [x] Retrieve an array all the Smurfs in the Smurf DB by writing a `GET` to the endpoint `/smurfs`.
+- [x] Double check that your response from the server is an array of smurfs.
 
 ```js
 [
@@ -74,7 +74,7 @@ Follow these steps to set up your project:
 
 ### POST '/smurfs'
 
-- [ ] Design the functionality to add a smurf to the Smurf DB you'll need all three fields. `name`, `age`, and `height`.
+- [x] Design the functionality to add a smurf to the Smurf DB you'll need all three fields. `name`, `age`, and `height`.
 
 Example of the shape of data to be sent to the `POST` endpoint:
 
@@ -86,7 +86,7 @@ Example of the shape of data to be sent to the `POST` endpoint:
 }
 ```
 
-- [ ] Double check to make sure that a smurf is created correctly once your functionality is built out.
+- [x] Double check to make sure that a smurf is created correctly once your functionality is built out.
 
 Initially Brainey will be in the array, but it takes more than one smurf to make the village. Be sure to add a few smurfs to populate our smurf village.
 
@@ -117,7 +117,7 @@ The following two endpoints are here for you if you'd like to push yourselves a 
 
 ### PUT '/smurfs/123', where 123 is the Id of the smurf you want to modify
 
-- [ ] For this endpoint to work, you'll need an `id` added to the URL, and at least one field to update on the Smurf object. `name` `age` `height`.
+- [x] For this endpoint to work, you'll need an `id` added to the URL, and at least one field to update on the Smurf object. `name` `age` `height`.
 
 Example:
 

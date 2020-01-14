@@ -12,8 +12,15 @@ import { rootReducer } from "./Redux/reducers/index";
 
 const composeEnhancers = composeWithDevTools({});
 
-let store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+const logger = ({ getState }) => next => action => {
+  console.log("Dispatching this type of action: ", action);
+  next(action);
+};
 
+let store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(logger, thunk))
+);
 ReactDOM.render(
   <Provider store={store}>
     <App />
