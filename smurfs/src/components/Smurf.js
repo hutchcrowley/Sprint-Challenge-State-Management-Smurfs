@@ -4,6 +4,8 @@ import { deleteSmurf } from "../Redux/actions/index";
 
 import { connect } from "react-redux";
 
+import { Link } from "react-router-dom";
+
 import Spinner from "./Spinner";
 
 const Smurf = props => {
@@ -33,6 +35,21 @@ const Smurf = props => {
               Remove Smurf!
             </button>
           </div>
+          <div className="edit-smurf">
+            <Link
+              to={{
+                pathname: "/smurf-editor",
+                state: {
+                  name: props.smurf.name,
+                  age: props.smurf.age,
+                  height: props.smurf.height,
+                  id: props.smurf.id
+                }
+              }}
+            >
+              <button>Edit Smurf</button>
+            </Link>
+          </div>
         </div>
       ) : (
         <Spinner />
@@ -43,6 +60,7 @@ const Smurf = props => {
 
 const mapStateToProps = state => {
   return {
+    smurf: state.smurfs,
     isDeleting: state.isDeleting
   };
 };

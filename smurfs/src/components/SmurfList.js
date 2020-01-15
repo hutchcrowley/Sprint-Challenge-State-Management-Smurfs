@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import { connect } from "react-redux";
 
 import Spinner from "./Spinner";
+import { getSmurfs } from "../Redux/actions/index";
 
 import Smurf from "./Smurf";
-import { getSmurfs } from "../Redux/actions";
 
 const SmurfList = props => {
-  const [prevSmurfs, setPrevSmurfs] = useState(props.smurfs);
-
   useEffect(() => {
-    let initSmurfs = props.getSmurfs();
-    setPrevSmurfs(initSmurfs);
-    console.log(prevSmurfs);
-  }, [prevSmurfs]);
-
+    let smurfs = props.getSmurfs();
+    console.log(smurfs);
+  }, [props]);
   return (
     <div>
       {!props.isloading ? (

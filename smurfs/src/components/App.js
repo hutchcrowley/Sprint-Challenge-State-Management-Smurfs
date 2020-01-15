@@ -3,6 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import SmurfForm from "./SmurfForm";
+import SmurfEditForm from "./SmurfEditForm";
 import SmurfList from "./SmurfList";
 import Navigation from "./Navigation";
 import NoMatch from "./NoMatch";
@@ -27,6 +28,9 @@ const App = props => {
         </Route>
         <Route path="/smurf-adder">
           <SmurfForm />
+        </Route>
+        <Route path="/smurf-editor">
+          <SmurfEditForm />
         </Route>
         <Route component={NoMatch} />
       </Switch>
