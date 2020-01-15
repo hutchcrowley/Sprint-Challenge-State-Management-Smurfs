@@ -4,16 +4,32 @@ import { connect } from "react-redux";
 
 import SmurfForm from "./SmurfForm";
 import SmurfList from "./SmurfList";
-import SmurfEditForm from "./SmurfEditForm";
+import Navigation from "./Navigation";
+import NoMatch from "./NoMatch";
 
 import "./App.css";
+
+import { Route, Switch, Redirect } from "react-router-dom";
 
 const App = props => {
   return (
     <div className="App">
-      <SmurfForm />
-      <SmurfList />
-      <SmurfEditForm />
+      <Navigation />
+      <Switch>
+        <Route exact path="/Home">
+          <h1>
+            Welcome to the Smurf Management System, powered by React/ Redux!
+          </h1>
+          <SmurfList />
+        </Route>
+        <Route exact path="/">
+          <Redirect to="/Home" />
+        </Route>
+        <Route path="/smurf-adder">
+          <SmurfForm />
+        </Route>
+        <Route component={NoMatch} />
+      </Switch>
     </div>
   );
 };

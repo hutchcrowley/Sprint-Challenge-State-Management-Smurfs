@@ -21,7 +21,7 @@ export const getSmurfs = () => dispatch => {
   axios
     .get("http://localhost:3333/smurfs")
     .then(res => {
-      console.log("Result of GET request to API: ", res);
+      console.log("Result of GET request to API: ", res.data);
       dispatch({ type: GET_SMURFS_SUCCESS, payload: res.data });
     })
     .catch(err => {
@@ -64,10 +64,10 @@ export const deleteSmurf = id => dispatch => {
     });
 };
 
-export const editSmurf = updatedSmurf => dispatch => {
+export const editSmurf = smurf => dispatch => {
   dispatch({ type: EDIT_SMURF });
   axios
-    .put(`http://localhost:3333/smurfs/${updatedSmurf.id}`, updatedSmurf)
+    .put(`http://localhost:3333/smurfs/${smurf.id}`, smurf)
     .then(res => {
       console.log("This is the result of a put request to the API: ", res.data);
       dispatch({ type: EDIT_SMURF_SUCCESS, payload: res.data });

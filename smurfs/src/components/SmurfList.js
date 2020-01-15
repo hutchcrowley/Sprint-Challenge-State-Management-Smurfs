@@ -1,38 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { connect } from "react-redux";
 
 import Spinner from "./Spinner";
 
 import Smurf from "./Smurf";
-
-import { getSmurfs } from "../Redux/actions/index";
+import { getSmurfs } from "../Redux/actions";
 
 const SmurfList = props => {
-  const initSmurfs = props.getSmurfs;
-  useEffect(() => {
-    initSmurfs([{}]);
-  }, []);
+  const [prevSmurfs, setPrevSmurfs] = useState(props.smurfs);
 
-  console.log("This is the initial smurf village: ", props.smurfs);
+  useEffect(() => {
+    let initSmurfs = props.getSmurfs();
+    setPrevSmurfs(initSmurfs);
+    console.log(prevSmurfs);
+  }, [prevSmurfs]);
 
   return (
     <div>
       {!props.isloading ? (
-        <ol className="smurf-list">
-          {props.smurfs.map(smurf => {
-            return (
-              <li key={smurf.id}>
-                <Smurf
-                  id={smurf.id}
-                  name={smurf.name}
-                  age={smurf.age}
-                  height={smurf.height}
-                />
-              </li>
-            );
-          })}
-        </ol>
+        <div className="smurf-list">
+          <ol>
+            {props.smurfs.map(smurf => {
+              return (
+                <li key={smurf.id}>
+                  <Smurf
+                    id={smurf.id}
+                    name={smurf.name}
+                    age={smurf.age}
+                    height={smurf.height}
+                  />
+                </li>
+              );
+            })}
+          </ol>
+        </div>
       ) : (
         <Spinner />
       )}

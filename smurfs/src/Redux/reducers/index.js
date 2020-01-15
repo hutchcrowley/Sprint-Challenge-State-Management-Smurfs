@@ -13,26 +13,28 @@ import {
   EDIT_SMURF_FAILURE
 } from "../actions/index";
 
-const initialState = {
+export const initialState = {
   smurfs: [
     {
       name: "",
       age: "",
-      height: ""
+      height: "",
+      id: ""
     }
   ],
   isLoading: false,
   isAdding: false,
   isUpdating: false,
   isDeleting: false,
-  error: ""
+  message: ""
 };
 
 export const rootReducer = (state = initialState, action) => {
   console.log("reducer: ", action.type, action.payload);
   switch (action.type) {
+    // Case for handling begin API call to get initial state
     case GET_SMURFS_START:
-      return { ...state, error: "", isLoading: true };
+      return { ...state, message: "BEGINNING API CALL...", isLoading: true };
 
     case GET_SMURFS_SUCCESS:
       console.log("Successfully retrieved smurf data!");
@@ -40,63 +42,70 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         smurfs: action.payload,
         isLoading: false,
-        error: ""
+        message: "SMURF DATA RETRIEVED!"
       };
 
     case GET_SMURFS_FAILURE:
-      return { ...state, isLoading: false, error: action.payload.error };
+      return { ...state, isLoading: false, message: `${action.payload.error}` };
 
     case ADD_SMURF_START:
-      return { ...state, isAdding: true, error: "" };
+      return { ...state, isAdding: true, message: "ADDING SMURF..." };
 
     case ADD_SMURF_SUCCESS:
       return {
         ...state,
         isAdding: false,
-        error: "Smurf added!",
+        message: "Smurf added!",
         smurfs: action.payload
       };
 
     case ADD_SMURF_FAILURE:
       console.log(action.payload);
-      return { ...state, isAdding: false, error: action.payload };
+      return { ...state, isAdding: false, message: `${action.payload.error}` };
+
     case DELETE_SMURF:
       return {
         ...state,
         isDeleting: true,
-        error: ""
+        message: "BYE BYE SMURF!"
       };
+
     case DELETE_SMURF_SUCCESS:
       return {
         ...state,
         isDeleting: false,
-        smurfs: action.payload
+        smurfs: action.payload,
+        message: "SMURF DELETED!"
       };
+
     case DELETE_SMURF_FAILURE:
       return {
         ...state,
         isDeleting: false,
-        error: action.payload
+        message: `${action.payload.error}`
       };
+
     case EDIT_SMURF:
       return {
         ...state,
         isUpdating: true,
-        error: "",
+        message: "UPDATING SMURF DATA...",
         smurfs: action.payload
       };
+
     case EDIT_SMURF_SUCCESS:
       return {
         ...state,
         smurfs: action.payload,
-        isUpdating: false
+        isUpdating: false,
+        message: "SMURF DATA UPDATED!"
       };
 
     case EDIT_SMURF_FAILURE:
       return {
         ...state,
         isUpdating: false,
-        error: action.payload
+        message: `${action.payload.data}`
       };
 
     default:

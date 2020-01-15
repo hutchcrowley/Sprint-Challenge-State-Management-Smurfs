@@ -13,22 +13,31 @@ const Smurf = props => {
   };
 
   return (
-    <div>
+    <>
       {!props.isDeleting ? (
         <div className="smurf-card" key={props.key}>
-          <h1>{props.name}</h1>
-          <h3>Smurf Age:</h3>
-          <h3>{props.age}</h3>
-          <h3>Smurf Height:</h3>
-          <h3>{props.height}</h3>
-          <button onClick={e => handleDelete(e, props.id)}>
-            Remove Smurf!
-          </button>
+          <header className="name">
+            <h3>Smurf Name:</h3>
+            <h1>{props.name}</h1>
+          </header>
+          <div className="age">
+            <h3>Smurf Age:</h3>
+            <h3>{props.age}</h3>
+          </div>
+          <div className="height">
+            <h3>Smurf Height:</h3>
+            <h3>{props.height}</h3>
+          </div>
+          <div className="delete-smurf">
+            <button onClick={e => handleDelete(e, props.id)}>
+              Remove Smurf!
+            </button>
+          </div>
         </div>
       ) : (
         <Spinner />
       )}
-    </div>
+    </>
   );
 };
 
