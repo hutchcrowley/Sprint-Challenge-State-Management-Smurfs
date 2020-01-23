@@ -1,17 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { connect } from "react-redux";
 
 import Spinner from "./Spinner";
-import { getSmurfs } from "../Redux/actions/index";
 
 import Smurf from "./Smurf";
 
 const SmurfList = props => {
-  useEffect(() => {
-    let smurfs = props.getSmurfs();
-    console.log(smurfs);
-  }, [props]);
   return (
     <div>
       {!props.isloading ? (
@@ -45,4 +40,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { getSmurfs })(SmurfList);
+export default connect(mapStateToProps, null)(SmurfList);

@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
 
 import { deleteSmurf } from "../Redux/actions/index";
 
-import { connect } from "react-redux";
-
-import { Link } from "react-router-dom";
-
 import Spinner from "./Spinner";
 
-const Smurf = props => {
-  const handleDelete = (e, id) => {
+function Smurf(props) {
+  const routeToList = event => {
+    event.preventDefault();
+    props.history.push("/smurf-list");
+  };
+
+  const [smurf, setSmurf] = useState();
+
+  const deleteSmurf = (e, id) => {
     e.preventDefault();
     props.deleteSmurf(id);
   };
@@ -31,24 +35,9 @@ const Smurf = props => {
             <h3>{props.height}</h3>
           </div>
           <div className="delete-smurf">
-            <button onClick={e => handleDelete(e, props.id)}>
+            <button onClick={e => deleteSmurf(e, props.id)}>
               Remove Smurf!
             </button>
-          </div>
-          <div className="edit-smurf">
-            <Link
-              to={{
-                pathname: "/smurf-editor",
-                state: {
-                  name: props.smurf.name,
-                  age: props.smurf.age,
-                  height: props.smurf.height,
-                  id: props.smurf.id
-                }
-              }}
-            >
-              <button>Edit Smurf</button>
-            </Link>
           </div>
         </div>
       ) : (
@@ -56,11 +45,10 @@ const Smurf = props => {
       )}
     </>
   );
-};
+}
 
 const mapStateToProps = state => {
   return {
-    smurf: state.smurfs,
     isDeleting: state.isDeleting
   };
 };

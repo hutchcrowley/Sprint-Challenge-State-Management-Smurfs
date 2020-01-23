@@ -8,9 +8,6 @@ const Navigation = props => {
       <NavLink exact to={`/`} activeClassName="active-link">
         <h3>Village Center</h3>
       </NavLink>
-      <NavLink to={`/smurf-adder`} activeClassName="active-link">
-        <h3>Add a Smurf!</h3>
-      </NavLink>
     </nav>
   );
 };

@@ -22,6 +22,7 @@ let store = createStore(
   rootReducer,
   composeEnhancers(applyMiddleware(logger, thunk))
 );
+
 ReactDOM.render(
   <Router>
     <Provider store={store}>

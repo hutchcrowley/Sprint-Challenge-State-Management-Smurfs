@@ -64,10 +64,16 @@ export const deleteSmurf = id => dispatch => {
     });
 };
 
-export const editSmurf = smurf => dispatch => {
-  dispatch({ type: EDIT_SMURF });
+export const editSmurf = (props, newSmurf) => dispatch => {
+  dispatch({
+    type: EDIT_SMURF,
+    payload: {
+      smurfs: props.smurfs,
+      newSmurf: newSmurf
+    }
+  });
   axios
-    .put(`http://localhost:3333/smurfs/${smurf.id}`, smurf)
+    .put(`http://localhost:3333/smurfs/${newSmurf.id}`, newSmurf)
     .then(res => {
       console.log("This is the result of a put request to the API: ", res.data);
       dispatch({ type: EDIT_SMURF_SUCCESS, payload: res.data });

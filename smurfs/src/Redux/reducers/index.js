@@ -95,8 +95,8 @@ export const rootReducer = (state = initialState, action) => {
 
     case EDIT_SMURF_SUCCESS:
       return {
-        ...state,
-        smurfs: action.payload,
+        ...smurfs,
+        smurfs: action.payload.smurfs,
         isUpdating: false,
         message: "SMURF DATA UPDATED!"
       };

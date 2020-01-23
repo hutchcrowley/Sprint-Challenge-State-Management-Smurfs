@@ -2,34 +2,50 @@ import React, { useState } from "react";
 
 import { connect } from "react-redux";
 
-import { useHistory } from "react-router-dom";
-
-import { addSmurf, editSmurf } from "../Redux/actions/index";
+import { addSmurf } from "../Redux/actions/index";
+import { editSmurf } from "../Redux/actions/index";
 
 const SmurfForm = props => {
   const [newSmurf, setNewSmurf] = useState({
-    name: "",
-    age: "",
-    height: ""
+    smurf: {
+      name: "",
+      age: "",
+      height: "",
+      id: null
+    }
   });
-
-  let button = useHistory();
+  const [editSmurf, setEditSmurf] = useState();
 
   const handleSubmit = e => {
     e.preventDefault();
     console.log(newSmurf);
     props.addSmurf(newSmurf);
-    button.push("/");
+  };
+
+  const handleEditSubmit = e => {
+    e.preventDefault();
+    console.log(editSmurf);
+    props.editSmurf(editSmurf);
   };
 
   const handleChanges = e => {
+    e.persist();
     setNewSmurf({ ...newSmurf, [e.target.name]: e.target.value });
+  };
+
+  const handleEditChanges = e => {
+    e.persist();
+    setEditSmurf({ ...props.smurfs, [e.target.name]: e.target.value });
   };
 
   return (
     <>
       <div className="App">
-        <form className="smurf-list" onSubmit={handleSubmit}>
+        <form
+          className="smurf-list"
+          onChange={handleChanges}
+          onSubmit={handleSubmit}
+        >
           <label htmlFor="name">
             Enter Smurf Name
             <input
@@ -63,6 +79,9 @@ const SmurfForm = props => {
           <button type="submit" onClick={handleSubmit}>
             Add Smurf
           </button>
+          <div className="smurf-edit-section">
+            <button onClick={handleEditSubmit}>Edit Smurf</button>
+          </div>
         </form>
       </div>
     </>
@@ -71,7 +90,8 @@ const SmurfForm = props => {
 
 const mapStateToProps = state => {
   return {
-    smurf: state.smurfs,
+    smurfs: state.smurfs,
+    smurf: state.newSmurf,
     isAdding: state.isAdding
   };
 };
