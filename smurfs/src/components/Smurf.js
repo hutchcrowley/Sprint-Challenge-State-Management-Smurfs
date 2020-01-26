@@ -18,6 +18,11 @@ function Smurf(props) {
     props.deleteSmurf(id);
   };
 
+  const routeToUpdate = e => {
+    e.preventDefault();
+    console.log(props);
+  };
+
   return (
     <>
       {!props.isDeleting ? (
@@ -35,8 +40,14 @@ function Smurf(props) {
             <h3>{props.height}</h3>
           </div>
           <div className="delete-smurf">
-            <button onClick={e => deleteSmurf(e, props.id)}>
+            <button
+              className="md-button"
+              onClick={e => deleteSmurf(e, props.id)}
+            >
               Remove Smurf!
+            </button>
+            <button className="md-button" onClick={routeToUpdate}>
+              Edit Smurf!
             </button>
           </div>
         </div>
