@@ -28,7 +28,7 @@ export const getSmurfs = () => dispatch => {
       console.log("ERROR: data not recieved from server ", err.response);
       dispatch({
         type: GET_SMURFS_FAILURE,
-        payload: `${err.response.status} ${err.response.data}`
+        payload: `${err} ${err.response}`
       });
     });
 };
@@ -64,16 +64,12 @@ export const deleteSmurf = id => dispatch => {
     });
 };
 
-export const editSmurf = (props, newSmurf) => dispatch => {
+export const updateSmurf = (id, editSmurf) => dispatch => {
   dispatch({
-    type: EDIT_SMURF,
-    payload: {
-      smurfs: props.smurfs,
-      newSmurf: newSmurf
-    }
+    type: EDIT_SMURF
   });
   axios
-    .put(`http://localhost:3333/smurfs/${newSmurf.id}`, newSmurf)
+    .put(`http://localhost:3333/smurfs/${id}`, editSmurf)
     .then(res => {
       console.log("This is the result of a put request to the API: ", res.data);
       dispatch({ type: EDIT_SMURF_SUCCESS, payload: res.data });

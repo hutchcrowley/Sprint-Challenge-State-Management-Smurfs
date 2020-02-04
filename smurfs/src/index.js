@@ -11,6 +11,8 @@ import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import { rootReducer } from "./Redux/reducers/index";
 
+import "./App.css";
+
 const composeEnhancers = composeWithDevTools({});
 
 const logger = ({ getState }) => next => action => {

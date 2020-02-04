@@ -7,25 +7,25 @@ import Spinner from "./Spinner";
 import Smurf from "./Smurf";
 
 const SmurfList = props => {
+  console.log("this is props at SmurfList: ", props);
   return (
-    <div>
+    <div className="smurf-list">
       {!props.isloading ? (
-        <div className="smurf-list">
-          <ol>
-            {props.smurfs.map(smurf => {
-              return (
-                <li key={smurf.id}>
-                  <Smurf
-                    id={smurf.id}
-                    name={smurf.name}
-                    age={smurf.age}
-                    height={smurf.height}
-                  />
-                </li>
-              );
-            })}
-          </ol>
-        </div>
+        <ol>
+          {props.smurfs.map(smurf => {
+            return (
+              <li key={smurf.id}>
+                <Smurf
+                  smurf={smurf}
+                  id={smurf.id}
+                  name={smurf.name}
+                  age={smurf.age}
+                  height={smurf.height}
+                />
+              </li>
+            );
+          })}
+        </ol>
       ) : (
         <Spinner />
       )}

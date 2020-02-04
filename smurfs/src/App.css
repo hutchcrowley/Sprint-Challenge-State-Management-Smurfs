@@ -1,0 +1,134 @@
+* {
+  margin: 0;
+}
+
+body html {
+  height: auto;
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.root {
+  margin: 0;
+}
+
+.App-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  align-items: center;
+}
+
+.App {
+  background-color: #0c5ac0a4;
+  color: #ffffff;
+  height: auto;
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  align-items: center;
+  margin-top: 100px;
+  padding-top: 3rem;
+}
+
+.App h1 {
+  color: #392abb;
+}
+
+.App ol {
+  list-style-type: none;
+}
+
+.smurf-list {
+  margin-top: 6rem;
+}
+
+.smurf-card {
+  border: 3px solid black;
+  background-color: #1440b934;
+  border-radius: 15px;
+  width: 30rem;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin-bottom: 8rem;
+  padding: 2rem;
+  text-align: justify;
+}
+
+.smurf-card h1 {
+  color: #ffffff;
+  margin: 0;
+  text-decoration: underline;
+}
+
+.smurf-form {
+  border: 1px solid red;
+  height: 100vh;
+  padding: 3rem;
+  width: 50%;
+  display: flex;
+}
+
+.add-field {
+  width: 100%;
+}
+
+.add-field input {
+  width: 100%;
+  margin-bottom: 2rem;
+  margin-left: 2rem;
+}
+
+h3 {
+  margin: 1rem 1.3rem;
+  text-decoration: underline;
+}
+
+.card-field {
+  color: #9ec3ce;
+  text-align: left;
+  width: 65%;
+}
+
+.button {
+  margin: 0.5rem 0rem;
+  min-height: 2.5rem;
+  min-width: 8rem;
+  background-color: #0025c9;
+  color: white;
+  border-radius: 10px;
+}
+
+.button-md-button {
+  margin-top: 1rem;
+  min-height: 2.5rem;
+  min-width: 8rem;
+  background-color: #0025c9;
+  color: white;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.nav-bar {
+  height: 100px;
+  width: 100%;
+  background-color: #213883;
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+}
+
+.nav-bar ul {
+  height: 100px;
+  width: 25%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  list-style: none;
+}
+
+.nav-bar li {
+  margin: 0;
+}

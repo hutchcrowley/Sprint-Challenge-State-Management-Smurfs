@@ -3,22 +3,24 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import { addSmurf } from "../Redux/actions/index";
-import { editSmurf } from Redux/actions/index";
+import { useHistory } from "react-router-dom";
 
 const SmurfForm = props => {
   const [newSmurf, setNewSmurf] = useState({
     smurf: {
       name: "",
       age: "",
-      height: "",
-
+      height: ""
     }
   });
+
+  let history = useHistory();
 
   const handleSubmit = e => {
     e.preventDefault();
     console.log(newSmurf);
     props.addSmurf(newSmurf);
+    history.push("/");
   };
 
   const handleChanges = e => {
@@ -26,55 +28,48 @@ const SmurfForm = props => {
     setNewSmurf({ ...newSmurf, [e.target.name]: e.target.value });
   };
 
-
-
   return (
-    <>
-      <div className="smurf-form">
-        <form
-          className="smurf-add-form"
-          onChange={handleChanges}
-          onSubmit={handleSubmit}
+    <div className="smurf-form">
+      <form onChange={handleChanges} onSubmit={handleSubmit}>
+        <label htmlFor="name" className="add-field">
+          <h4>Enter Smurf Name</h4>
+          <input
+            onChange={handleChanges}
+            className="input"
+            type="text"
+            placeholder="Name: "
+            name="name"
+          />
+        </label>
+        <label htmlFor="age" className="add-field">
+          <h4>Enter Smurf Age</h4>
+          <input
+            onChange={handleChanges}
+            className="input"
+            name="age"
+            type="number"
+            placeholder="Age: "
+          />
+        </label>
+        <label htmlFor="height" className="add-field">
+          <h4>Enter Smurf's Height</h4>
+          <input
+            onChange={handleChanges}
+            className="input"
+            type="text"
+            placeholder="Height: "
+            name="height"
+          />
+        </label>
+        <button
+          type="submit"
+          onClick={handleSubmit}
+          className="button add-button"
         >
-          <label htmlFor="name">
-            Enter Smurf Name
-            <input
-              onChange={handleChanges}
-              className="input"
-              type="text"
-              placeholder="Name: "
-              name="name"
-            />
-          </label>
-          <label htmlFor="age">
-            Enter Smurf Age
-            <input
-              onChange={handleChanges}
-              className="input"
-              name="age"
-              type="text"
-              placeholder="Age: "
-            />
-          </label>
-          <label htmlFor="height">
-            Enter Smurf's Height
-            <input
-              onChange={handleChanges}
-              className="input"
-              type="text"
-              placeholder="Height: "
-              name="height"
-            />
-          </label>
-          <button type="submit" onClick={handleSubmit}>
-            Add Smurf
-          </button>
-          <div className="smurf-edit-section">
-            <button onClick={handleEditSubmit}>Edit Smurf</button>
-          </div>
-        </form>
-      </div>
-    </>
+          Add Smurf
+        </button>
+      </form>
+    </div>
   );
 };
 

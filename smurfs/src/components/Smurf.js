@@ -1,55 +1,52 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
-import { deleteSmurf } from "../Redux/actions/index";
+import { deleteSmurf, updateSmurf } from "../Redux/actions/index";
 
 import Spinner from "./Spinner";
 
 function Smurf(props) {
-  const routeToList = event => {
-    event.preventDefault();
-    props.history.push("/smurf-list");
-  };
-
-  const [smurf, setSmurf] = useState();
-
   const deleteSmurf = (e, id) => {
+    console.log(`Whereisthistakingme: ${id}`);
     e.preventDefault();
     props.deleteSmurf(id);
   };
 
-  const routeToUpdate = e => {
-    e.preventDefault();
-    console.log(props);
-  };
+  // const routeToUpdate = e => {
+  //   e.preventDefault();
+  //   console.log(`Whereisthistakingme: ${props.id}`);
+  //   console.log(history);
+  //   history.push(`/edit-smurf/${props.id}`);
+  // };
 
   return (
     <>
-      {!props.isDeleting ? (
+      {!props.isLoading ? (
         <div className="smurf-card" key={props.key}>
-          <header className="name">
+          <div className="card-field">
             <h3>Smurf Name:</h3>
-            <h1>{props.name}</h1>
-          </header>
-          <div className="age">
+          </div>
+          <h1>{props.name}</h1>
+          <div className="card-field">
             <h3>Smurf Age:</h3>
-            <h3>{props.age}</h3>
           </div>
-          <div className="height">
+          <h2>{props.age}</h2>
+          <div className="card-field">
             <h3>Smurf Height:</h3>
-            <h3>{props.height}</h3>
           </div>
-          <div className="delete-smurf">
-            <button
-              className="md-button"
-              onClick={e => deleteSmurf(e, props.id)}
-            >
-              Remove Smurf!
-            </button>
-            <button className="md-button" onClick={routeToUpdate}>
-              Edit Smurf!
-            </button>
-          </div>
+          <h2>{props.height}</h2>
+
+          <button
+            className="button-md-button"
+            onClick={e => deleteSmurf(e, props.id)}
+          >
+            Remove Smurf!
+          </button>
+
+          <Link to={`/edit-smurf/${props.id}`}>
+            <button className="button-md-button">Edit Smurf</button>
+          </Link>
         </div>
       ) : (
         <Spinner />
@@ -60,7 +57,8 @@ function Smurf(props) {
 
 const mapStateToProps = state => {
   return {
-    isDeleting: state.isDeleting
+    isLoading: state.isLoading
   };
 };
-export default connect(mapStateToProps, { deleteSmurf })(Smurf);
+
+export default connect(mapStateToProps, { deleteSmurf, updateSmurf })(Smurf);

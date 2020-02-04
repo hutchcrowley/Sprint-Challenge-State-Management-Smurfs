@@ -1,13 +1,34 @@
 import React from "react";
 
-import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-const Navigation = props => {
+const Navigation = () => {
+  const history = useHistory();
+
+  function routeToAdd(e) {
+    e.preventDefault();
+    history.push("/add-smurf");
+  }
+
+  function routeToHome(e) {
+    e.preventDefault();
+    history.push("/");
+  }
+
   return (
     <nav className="nav-bar">
-      <NavLink exact to={`/`} activeClassName="active-link">
-        <h3>Village Center</h3>
-      </NavLink>
+      <ul>
+        <li>
+          <button onClick={routeToAdd} className="button add-button">
+            Add A Smurf!
+          </button>
+        </li>
+        <li>
+          <button onClick={routeToHome} className="button home-button">
+            Home
+          </button>
+        </li>
+      </ul>
     </nav>
   );
 };

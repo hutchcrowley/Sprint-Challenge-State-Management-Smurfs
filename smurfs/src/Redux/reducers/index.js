@@ -19,7 +19,7 @@ export const initialState = {
       name: "",
       age: "",
       height: "",
-      id: ""
+      id: null
     }
   ],
   isLoading: false,
@@ -48,6 +48,8 @@ export const rootReducer = (state = initialState, action) => {
     case GET_SMURFS_FAILURE:
       return { ...state, isLoading: false, message: `${action.payload.error}` };
 
+    // Action creators to add smurf
+
     case ADD_SMURF_START:
       return { ...state, isAdding: true, message: "ADDING SMURF..." };
 
@@ -62,6 +64,8 @@ export const rootReducer = (state = initialState, action) => {
     case ADD_SMURF_FAILURE:
       console.log(action.payload);
       return { ...state, isAdding: false, message: `${action.payload.error}` };
+
+    // Acion creators for deleting smurfs
 
     case DELETE_SMURF:
       return {
@@ -84,6 +88,8 @@ export const rootReducer = (state = initialState, action) => {
         isDeleting: false,
         message: `${action.payload.error}`
       };
+
+    // Action creators for editing/ updating smurfs
 
     case EDIT_SMURF:
       return {
