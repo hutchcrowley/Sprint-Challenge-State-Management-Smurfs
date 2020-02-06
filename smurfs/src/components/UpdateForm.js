@@ -4,13 +4,12 @@ import { connect } from "react-redux";
 
 import { useHistory } from "react-router-dom";
 
-import { getSmurfs, editSmurf } from "../Redux/actions/index";
+import { editSmurf } from "../Redux/actions/index";
 
 const initialSmurf = {
   name: "",
   age: null,
-  height: "",
-  id: ""
+  height: ""
 };
 
 const UpdateForm = props => {
@@ -20,21 +19,19 @@ const UpdateForm = props => {
 
   const [newSmurf, setNewSmurf] = useState(initialSmurf);
 
-  let newSmurfs = props.getSmurfs();
   useEffect(() => {
-    const editingSmurf = newSmurfs.find(smurf => {
-      return smurf.id === Number(props.match.params.id);
-    });
+    let editingSmurf = props.smurfs.find(
+      smurf => smurf.id === Number(props.match.params.id)
+    );
     if (editingSmurf) {
       setNewSmurf(editingSmurf);
     }
   }, []);
 
   const changeHandler = e => {
-    e.persist();
+    let value = e.target.value;
     setNewSmurf({
-      ...newSmurf,
-      [e.target.name]: e.target.value
+      [e.target.name]: value
     });
   };
 
@@ -84,8 +81,8 @@ const UpdateForm = props => {
 
 const mapStateToProps = state => {
   return {
-    smurfs: state.newSmurfs
+    smurfs: state.smurfs
   };
 };
 
-export default connect(null, { getSmurfs, editSmurf })(UpdateForm);
+export default connect(mapStateToProps, { editSmurf })(UpdateForm);
