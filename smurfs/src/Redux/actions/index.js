@@ -1,20 +1,18 @@
 import axios from "axios";
-
-export const GET_SMURFS_START = "GET_SMURFS_START";
-export const GET_SMURFS_SUCCESS = "GET_SMURFS_SUCCESS";
-export const GET_SMURFS_FAILURE = "GET_SMURFS_FAILURE";
-
-export const ADD_SMURF_START = "ADD_SMURF_START";
-export const ADD_SMURF_SUCCESS = "ADD_SMURF_SUCCESS";
-export const ADD_SMURF_FAILURE = "ADD_SMURF_FAILURE";
-
-export const DELETE_SMURF = "DELETE_SMURF";
-export const DELETE_SMURF_SUCCESS = "DELETE_SMURF_SUCCESS";
-export const DELETE_SMURF_FAILURE = "DELETE_SMURF_FAILURE";
-
-export const EDIT_SMURF = "EDIT_SMURF";
-export const EDIT_SMURF_SUCCESS = "EDIT_SMURF_SUCCESS";
-export const EDIT_SMURF_FAILURE = "EDIT_SMURF_FAILURE";
+import {
+  GET_SMURFS_START,
+  GET_SMURFS_SUCCESS,
+  GET_SMURFS_FAILURE,
+  ADD_SMURF_START,
+  ADD_SMURF_SUCCESS,
+  ADD_SMURF_FAILURE,
+  DELETE_SMURF_START,
+  DELETE_SMURF_SUCCESS,
+  DELETE_SMURF_FAILURE,
+  EDIT_SMURF_START,
+  EDIT_SMURF_SUCCESS,
+  EDIT_SMURF_FAILURE
+} from "./action_types";
 
 export const getSmurfs = () => dispatch => {
   dispatch({ type: GET_SMURFS_START });
@@ -51,7 +49,7 @@ export const addSmurf = newSmurf => dispatch => {
 };
 
 export const deleteSmurf = id => dispatch => {
-  dispatch({ type: DELETE_SMURF, id: id });
+  dispatch({ type: DELETE_SMURF_START, id: id });
   axios
     .delete(`http://localhost:3333/smurfs/${id}`)
     .then(res => {
@@ -64,9 +62,9 @@ export const deleteSmurf = id => dispatch => {
     });
 };
 
-export const updateSmurf = (id, editSmurf) => dispatch => {
+export const editSmurf = (id, editSmurf) => dispatch => {
   dispatch({
-    type: EDIT_SMURF
+    type: EDIT_SMURF_START
   });
   axios
     .put(`http://localhost:3333/smurfs/${id}`, editSmurf)

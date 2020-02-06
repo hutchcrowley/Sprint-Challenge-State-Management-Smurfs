@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { deleteSmurf, updateSmurf } from "../Redux/actions/index";
+import { deleteSmurf } from "../Redux/actions/index";
 
 import Spinner from "./Spinner";
 

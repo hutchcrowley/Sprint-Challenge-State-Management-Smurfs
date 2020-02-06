@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { useHistory, useParams } from "react-router-dom";
 
-import { updateSmurf } from "../Redux/actions/index";
+import { editSmurf } from "../Redux/actions/index";
 
 const UpdateForm = props => {
   const [newSmurf, setNewSmurf] = useState({});
@@ -14,19 +14,17 @@ const UpdateForm = props => {
   const { id } = useParams();
   console.log("This is props in the UpdateForm: ", props);
 
-  const setEditing = id => {
+  useEffect(() => {
     let editingSmurf = props.newSmurfs.find(smurf => smurf.id === Number(id));
     if (editingSmurf) {
       setNewSmurf(editingSmurf);
     }
     return newSmurf;
-  };
-  useEffect(() => {
-    setEditing();
-  }, [setEditing]);
+  }, []);
 
   const changeHandler = e => {
     e.persist();
+    s;
     setNewSmurf({
       ...newSmurf,
       [e.target.name]: e.target.value
@@ -35,7 +33,7 @@ const UpdateForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    updateSmurf(newSmurf);
+    editSmurf(newSmurf);
     history.push("/");
   };
   return (
