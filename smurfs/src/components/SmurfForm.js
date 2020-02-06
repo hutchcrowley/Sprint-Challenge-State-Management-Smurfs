@@ -77,7 +77,7 @@ const mapStateToProps = state => {
   return {
     smurfs: state.smurfs,
     smurf: state.newSmurf,
-    isAdding: state.isAdding
+    isLoading: state.isLoading
   };
 };
 

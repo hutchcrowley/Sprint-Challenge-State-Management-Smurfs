@@ -1,18 +1,20 @@
 import axios from "axios";
-import {
-  GET_SMURFS_START,
-  GET_SMURFS_SUCCESS,
-  GET_SMURFS_FAILURE,
-  ADD_SMURF_START,
-  ADD_SMURF_SUCCESS,
-  ADD_SMURF_FAILURE,
-  DELETE_SMURF_START,
-  DELETE_SMURF_SUCCESS,
-  DELETE_SMURF_FAILURE,
-  EDIT_SMURF_START,
-  EDIT_SMURF_SUCCESS,
-  EDIT_SMURF_FAILURE
-} from "./action_types";
+
+export const GET_SMURFS_START = "GET_SMURFS_START";
+export const GET_SMURFS_SUCCESS = "GET_SMURFS_SUCCESS";
+export const GET_SMURFS_FAILURE = "GET_SMURFS_FAILURE";
+
+export const ADD_SMURF_START = "ADD_SMURF_START";
+export const ADD_SMURF_SUCCESS = "ADD_SMURF_SUCCESS";
+export const ADD_SMURF_FAILURE = "ADD_SMURF_FAILURE";
+
+export const DELETE_SMURF_START = "DELETE_SMURF_START";
+export const DELETE_SMURF_SUCCESS = "DELETE_SMURF_SUCCESS";
+export const DELETE_SMURF_FAILURE = "DELETE_SMURF_FAILURE";
+
+export const EDIT_SMURF_START = "EDIT_SMURF_START";
+export const EDIT_SMURF_SUCCESS = "EDIT_SMURF_SUCCESS";
+export const EDIT_SMURF_FAILURE = "EDIT_SMURF_FAILURE";
 
 export const getSmurfs = () => dispatch => {
   dispatch({ type: GET_SMURFS_START });
@@ -49,7 +51,7 @@ export const addSmurf = newSmurf => dispatch => {
 };
 
 export const deleteSmurf = id => dispatch => {
-  dispatch({ type: DELETE_SMURF_START, id: id });
+  dispatch({ type: DELETE_SMURF_START, id });
   axios
     .delete(`http://localhost:3333/smurfs/${id}`)
     .then(res => {

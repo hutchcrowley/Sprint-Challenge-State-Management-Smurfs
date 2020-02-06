@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { connect } from "react-redux";
 
-import SmurfList from "./SmurfList";
+import Home from "./Home";
 import Navigation from "./Navigation";
 import UpdateForm from "./UpdateForm";
 import SmurfForm from "./SmurfForm";
@@ -10,10 +10,12 @@ import NoMatch from "./NoMatch";
 
 import { getSmurfs } from "../Redux/actions/index";
 
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 const App = props => {
-  const [newSmurfs, setNewSmurfs] = useState(props.smurfs);
+  const [newSmurfs, setNewSmurfs] = useState([]);
+
+  console.log("in App.js: newSmurf = ", newSmurfs);
 
   useEffect(() => {
     let initSmurfs = props.getSmurfs();
@@ -23,20 +25,13 @@ const App = props => {
 
   console.log("This is props at App.js: ", props);
 
-  console.log("from App.js:", props.smurfs);
   return (
     <div className="App-wrapper">
       <Navigation />
       <div className="App">
         <Switch>
           <Route exact path="/">
-            <h1>
-              Welcome to the Smurf Management System, powered by React/ Redux!
-            </h1>
-            <SmurfList />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/Home" />
+            <Home />
           </Route>
           <Route path="/add-smurf" component={SmurfForm} />
           <Route path="/edit-smurf/:id" component={UpdateForm} />
@@ -47,11 +42,4 @@ const App = props => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    smurfs: state.smurfs,
-    getSmurfs: state.getSmurfs
-  };
-};
-
-export default connect(mapStateToProps, { getSmurfs })(App);
+export default connect(null, { getSmurfs })(App);

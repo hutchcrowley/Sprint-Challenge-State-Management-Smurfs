@@ -1,30 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { connect } from "react-redux";
 
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-import { editSmurf } from "../Redux/actions/index";
+import { getSmurfs, editSmurf } from "../Redux/actions/index";
+
+const initialSmurf = {
+  name: "",
+  age: null,
+  height: "",
+  id: ""
+};
 
 const UpdateForm = props => {
-  const [newSmurf, setNewSmurf] = useState({});
-
   const history = useHistory();
 
-  const { id } = useParams();
   console.log("This is props in the UpdateForm: ", props);
 
+  const [newSmurf, setNewSmurf] = useState(initialSmurf);
+
+  let newSmurfs = props.getSmurfs();
   useEffect(() => {
-    let editingSmurf = props.newSmurfs.find(smurf => smurf.id === Number(id));
+    const editingSmurf = newSmurfs.find(smurf => {
+      return smurf.id === Number(props.match.params.id);
+    });
     if (editingSmurf) {
       setNewSmurf(editingSmurf);
     }
-    return newSmurf;
   }, []);
 
   const changeHandler = e => {
     e.persist();
-    s;
     setNewSmurf({
       ...newSmurf,
       [e.target.name]: e.target.value
@@ -33,7 +40,8 @@ const UpdateForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    editSmurf(newSmurf);
+    const id = Number(props.match.params.id);
+    props.editSmurf(id, newSmurf);
     history.push("/");
   };
   return (
@@ -76,8 +84,8 @@ const UpdateForm = props => {
 
 const mapStateToProps = state => {
   return {
-    newSmurfs: state.newSmurfs
+    smurfs: state.newSmurfs
   };
 };
 
-export default connect(mapStateToProps, { updateSmurf })(UpdateForm);
+export default connect(null, { getSmurfs, editSmurf })(UpdateForm);

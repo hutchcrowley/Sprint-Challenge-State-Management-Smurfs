@@ -15,14 +15,16 @@ body html {
 .App-wrapper {
   display: flex;
   flex-flow: column nowrap;
+  min-height: 946px;
+  height: auto;
+  background-color: #0c5ac0a4;
   width: 100%;
   align-items: center;
 }
 
 .App {
-  background-color: #0c5ac0a4;
-  color: #ffffff;
   height: auto;
+  color: #ffffff;
   display: flex;
   flex-flow: column nowrap;
   width: 100%;
@@ -63,11 +65,14 @@ body html {
 }
 
 .smurf-form {
-  border: 1px solid red;
-  height: 100vh;
+  margin-top: 9.5rem;
+  border: 4px solid rgb(4, 0, 255);
+  border-radius: 20px;
+  height: auto;
   padding: 3rem;
   width: 50%;
   display: flex;
+  justify-content: center;
 }
 
 .add-field {

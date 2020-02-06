@@ -3,19 +3,21 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./components/App";
+import "./App.css";
+
+import { Provider } from "react-redux";
+
+import rootReducer from "./Redux/reducers/index";
+
+import { createStore, applyMiddleware } from "redux";
+
+import thunk from "redux-thunk";
 
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import { Provider } from "react-redux";
-import rootReducer from "./Redux/reducers/index";
-
-import "./App.css";
-
 const composeEnhancers = composeWithDevTools({});
 
-const logger = ({ getState }) => next => action => {
+const logger = ({ getState, dispatch }) => next => action => {
   console.log("Dispatching this type of action: ", action);
   next(action);
 };

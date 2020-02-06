@@ -1,29 +1,31 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { deleteSmurf } from "../Redux/actions/index";
 
 import Spinner from "./Spinner";
 
 function Smurf(props) {
+  const history = useHistory();
+
   const deleteSmurf = (e, id) => {
     console.log(`Whereisthistakingme: ${id}`);
     e.preventDefault();
     props.deleteSmurf(id);
   };
 
-  // const routeToUpdate = e => {
-  //   e.preventDefault();
-  //   console.log(`Whereisthistakingme: ${props.id}`);
-  //   console.log(history);
-  //   history.push(`/edit-smurf/${props.id}`);
-  // };
+  const routeToUpdate = (e, id) => {
+    e.preventDefault();
+    console.log(`Whereisthistakingme: ${id}`);
+    console.log(history);
+    history.push(`/edit-smurf/${id}`);
+  };
 
   return (
     <>
       {!props.isLoading ? (
-        <div className="smurf-card" key={props.key}>
+        <div className="smurf-card">
           <div className="card-field">
             <h3>Smurf Name:</h3>
           </div>
@@ -44,9 +46,12 @@ function Smurf(props) {
             Remove Smurf!
           </button>
 
-          <Link to={`/edit-smurf/${props.id}`}>
-            <button className="button-md-button">Edit Smurf</button>
-          </Link>
+          <button
+            className="button-md-button"
+            onClick={e => routeToUpdate(e, props.id)}
+          >
+            Edit Smurf
+          </button>
         </div>
       ) : (
         <Spinner />
@@ -61,4 +66,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { deleteSmurf, updateSmurf })(Smurf);
+export default connect(mapStateToProps, { deleteSmurf })(Smurf);
