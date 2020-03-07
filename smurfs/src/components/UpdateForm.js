@@ -6,33 +6,31 @@ import { useHistory } from "react-router-dom";
 
 import { editSmurf } from "../Redux/actions/index";
 
-const initialSmurf = {
-  name: "",
-  age: null,
-  height: ""
-};
-
 const UpdateForm = props => {
   const history = useHistory();
 
   console.log("This is props in the UpdateForm: ", props);
-
-  const [newSmurf, setNewSmurf] = useState(initialSmurf);
-
+  
+  const [newSmurf, setNewSmurf] = useState({});
+  
   useEffect(() => {
     let editingSmurf = props.smurfs.find(
       smurf => smurf.id === Number(props.match.params.id)
-    );
+      );
+      console.log("This is editSmurf in the UpdateForm: ", editingSmurf);
     if (editingSmurf) {
       setNewSmurf(editingSmurf);
+      console.log('this is newSmurf in the Update Form: ', newSmurf)
     }
   }, []);
 
   const changeHandler = e => {
-    let value = e.target.value;
+    e.persist()
     setNewSmurf({
-      [e.target.name]: value
+      ...newSmurf,
+      [e.target.name]: e.target.value
     });
+    console.log(newSmurf)
   };
 
   const handleSubmit = e => {
@@ -50,9 +48,8 @@ const UpdateForm = props => {
           classname="update-input"
           type="text"
           name="name"
-          onchange={changeHandler}
+          onchange={e => {changeHandler(e)}}
           placeholder="Name"
-          value={newSmurf.name}
         />
 
         <input
@@ -61,7 +58,6 @@ const UpdateForm = props => {
           name="age"
           onchange={changeHandler}
           placeholder="Age"
-          value={newSmurf.age}
         />
 
         <input
@@ -70,7 +66,6 @@ const UpdateForm = props => {
           name="height"
           onchange={changeHandler}
           placeholder="Height"
-          value={newSmurf.height}
         />
 
         <input className="button update-button" type="submit" />

@@ -19,7 +19,7 @@ export const initialState = {
       name: "",
       age: "",
       height: "",
-      id: ""
+      id: null
     }
   ],
   isLoading: false,
