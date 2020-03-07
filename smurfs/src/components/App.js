@@ -20,10 +20,8 @@ const App = props => {
   useEffect(() => {
     let initSmurfs = props.getSmurfs();
     setNewSmurfs(initSmurfs);
-    console.log(newSmurfs);
   }, []);
 
-  console.log("This is props at App.js: ", props);
 
   return (
     <div className="App-wrapper">

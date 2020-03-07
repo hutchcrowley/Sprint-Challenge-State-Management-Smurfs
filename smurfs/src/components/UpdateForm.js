@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { connect } from "react-redux";
 
@@ -7,25 +7,18 @@ import { useHistory } from "react-router-dom";
 import { editSmurf } from "../Redux/actions/index";
 
 const UpdateForm = props => {
+
   const history = useHistory();
 
   console.log("This is props in the UpdateForm: ", props);
   
+  const id = Number(props.match.params.id);
+
+  console.log(id)
+  
   const [newSmurf, setNewSmurf] = useState({});
   
-  useEffect(() => {
-    let editingSmurf = props.smurfs.find(
-      smurf => smurf.id === Number(props.match.params.id)
-      );
-      console.log("This is editSmurf in the UpdateForm: ", editingSmurf);
-    if (editingSmurf) {
-      setNewSmurf(editingSmurf);
-      console.log('this is newSmurf in the Update Form: ', newSmurf)
-    }
-  }, []);
-
   const changeHandler = e => {
-    e.persist()
     setNewSmurf({
       ...newSmurf,
       [e.target.name]: e.target.value
@@ -35,36 +28,38 @@ const UpdateForm = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const id = Number(props.match.params.id);
     props.editSmurf(id, newSmurf);
+    // const refreshSmurfs = props.getSmurfs();
+    // console.log('refreshSmurfs after form submit on UpdateForm component: ', refreshSmurfs)
     history.push("/");
   };
+
   return (
     <div className="update-form">
-      <h2>Update Smurf</h2>
+      <h1>Update Smurf</h1>
 
       <form onSubmit={handleSubmit}>
         <input
-          classname="update-input"
+          className="update-input"
           type="text"
           name="name"
-          onchange={e => {changeHandler(e)}}
+          onChange={changeHandler}
           placeholder="Name"
         />
 
         <input
-          classname="update-input"
+          className="update-input"
           type="number"
           name="age"
-          onchange={changeHandler}
+          onChange={changeHandler}
           placeholder="Age"
         />
 
         <input
-          classname="update-input"
+          className="update-input"
           type="text"
           name="height"
-          onchange={changeHandler}
+          onChange={changeHandler}
           placeholder="Height"
         />
 

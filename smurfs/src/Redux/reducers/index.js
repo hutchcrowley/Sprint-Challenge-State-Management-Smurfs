@@ -37,8 +37,8 @@ const rootReducer = (state = initialState, action) => {
       console.log("Successfully retrieved smurf data!");
       return {
         ...state,
-        smurfs: action.payload,
         isLoading: false,
+        smurfs: action.payload,
         message: "SMURF DATA RETRIEVED!"
       };
 
@@ -52,8 +52,8 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        message: "Smurf added!",
-        smurfs: action.payload
+        smurfs: action.payload,
+        message: "Smurf added!"
       };
 
     case ADD_SMURF_FAILURE:
@@ -85,23 +85,22 @@ const rootReducer = (state = initialState, action) => {
     case EDIT_SMURF_START:
       return {
         ...state,
-        isUpdating: true,
-        message: "UPDATING SMURF DATA...",
-        smurfs: action.payload
+        isLoading: true,
+        message: "UPDATING SMURF DATA..."
       };
 
     case EDIT_SMURF_SUCCESS:
       return {
         ...state,
-        smurfs: action.payload.smurfs,
-        isUpdating: false,
+        isLoading: false,
+        smurfs: action.payload,
         message: "SMURF DATA UPDATED!"
       };
 
     case EDIT_SMURF_FAILURE:
       return {
         ...state,
-        isUpdating: false,
+        isLoading: false,
         message: `${action.payload.data}`
       };
     default:

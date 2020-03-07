@@ -16,7 +16,13 @@ export const EDIT_SMURF_START = "EDIT_SMURF_START";
 export const EDIT_SMURF_SUCCESS = "EDIT_SMURF_SUCCESS";
 export const EDIT_SMURF_FAILURE = "EDIT_SMURF_FAILURE";
 
+// Here, I am setting my action type strings onto matching variables 
+// to improve software performance and debugging
+
 export const getSmurfs = () => dispatch => {
+
+  // This action creator "thunk" function makes an API call with axios, then, based upon the promise returned,
+  // returns a second function, dispatch, which will carry the action type and payload to the reducer function.
   dispatch({ type: GET_SMURFS_START });
   axios
     .get("http://localhost:3333/smurfs")
@@ -34,6 +40,7 @@ export const getSmurfs = () => dispatch => {
 };
 
 export const addSmurf = newSmurf => dispatch => {
+  console.log('newSmurf parameter to the addSmurf action creator function: ', newSmurf)
   dispatch({ type: ADD_SMURF_START });
   axios
     .post("http://localhost:3333/smurfs", newSmurf)
@@ -64,12 +71,13 @@ export const deleteSmurf = id => dispatch => {
     });
 };
 
-export const editSmurf = (id, editSmurf) => dispatch => {
+export const editSmurf = (id, newSmurf) => dispatch => {
+  console.log('newSmurf parameter on the editSmurf action creator function: ', newSmurf)
   dispatch({
     type: EDIT_SMURF_START
   });
   axios
-    .put(`http://localhost:3333/smurfs/${id}`, editSmurf)
+    .put(`http://localhost:3333/smurfs/${id}`, newSmurf)
     .then(res => {
       console.log("This is the result of a put request to the API: ", res.data);
       dispatch({ type: EDIT_SMURF_SUCCESS, payload: res.data });

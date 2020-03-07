@@ -26,9 +26,6 @@ function Smurf(props) {
     <>
       {!props.isLoading ? (
         <div className="smurf-card">
-          <div className="card-field">
-            <h3>Smurf Name:</h3>
-          </div>
           <h1>{props.name}</h1>
           <div className="card-field">
             <h3>Smurf Age:</h3>
@@ -38,20 +35,21 @@ function Smurf(props) {
             <h3>Smurf Height:</h3>
           </div>
           <h2>{props.height}</h2>
+          <div className="button-container">
+            <button
+              className="button-md-button"
+              onClick={e => deleteSmurf(e, props.id)}
+            >
+              Remove Smurf!
+            </button>
 
-          <button
-            className="button-md-button"
-            onClick={e => deleteSmurf(e, props.id)}
-          >
-            Remove Smurf!
-          </button>
-
-          <button
-            className="button-md-button"
-            onClick={e => routeToUpdate(e, props.id)}
-          >
-            Edit Smurf
-          </button>
+            <button
+              className="button-md-button"
+              onClick={e => routeToUpdate(e, props.id)}
+            >
+              Edit Smurf
+            </button>
+          </div>
         </div>
       ) : (
         <Spinner />

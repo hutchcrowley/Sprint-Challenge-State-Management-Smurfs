@@ -26,10 +26,12 @@ const SmurfForm = props => {
   const handleChanges = e => {
     e.persist();
     setNewSmurf({ ...newSmurf, [e.target.name]: e.target.value });
+    console.log('newSmurf in the SmurfForm component: ', newSmurf)
   };
 
   return (
     <div className="smurf-form">
+      <h1>Add a new Smurf!</h1>
       <form onChange={handleChanges} onSubmit={handleSubmit}>
         <label htmlFor="name" className="add-field">
           <h4>Enter Smurf Name</h4>
@@ -64,7 +66,7 @@ const SmurfForm = props => {
         <button
           type="submit"
           onClick={handleSubmit}
-          className="button add-button"
+          className="button-add-button"
         >
           Add Smurf
         </button>
